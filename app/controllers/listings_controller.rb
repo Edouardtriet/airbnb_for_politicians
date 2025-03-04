@@ -1,18 +1,22 @@
 class ListingsController < ApplicationController
+  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+
   def index
-    @listings = Listing.all  # This is correct
+    @listings = Listing.all
   end
 
   def show
-    @listing = Listing.find(params[:id])  # Changed 'listing' to 'Listing'
   end
 
   def new
-    @listing = Listing.new  # Changed 'listing' to 'Listing'
+    @listing = Listing.new
   end
 
   def create
-    @listing = Listing.new(listing_params)  # Changed 'listing' to 'Listing' and params[:listing] to listing_params
+    @listing = Listing.new(listing_params)
+    # ADDED: This line is needed to associate the listing with the current user
+    @listing.user = current_user
+
     if @listing.save
       redirect_to listing_path(@listing), notice: 'Listing was successfully created.'
     else
@@ -21,17 +25,21 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    @listing = Listing.find(params[:id])  # Changed 'listing' to 'Listing'
   end
 
   def update
-    @listing = Listing.find(params[:id])  # Changed 'listing' to 'Listing'
-    @listing.update(listing_params)  # Changed params[:listing] to listing_params
+    # REMOVED: @listing = Listing.find(params[:id])
+    # This is now handled by the before_action :set_listing
+
+    # CHANGE: Added if/else structure to handle failed updates
+    if @listing.update(listing_params)
+      redirect_to listing_path(@listing), notice: 'Listing was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @listing = Listing.find(params[:id])  # Changed 'listing' to 'Listing'
-    @listing.destroy
     redirect_to listings_path, status: :see_other
   end
 

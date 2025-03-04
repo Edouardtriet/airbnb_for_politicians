@@ -11,18 +11,21 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description, rows: 5, class: "form-control" %>
+    <%= form.label :type_of_event, "Event Type" %>
+    <%= form.select :type_of_event,
+                   Listing.type_of_events.keys.map { |type| [type.humanize, type] },
+                   { include_blank: "Select an event type" },
+                   { class: "form-control" } %>
   </div>
 
   <div class="form-group">
     <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01, class: "form-control" %>
+    <%= form.number_field :price, step: 1, class: "form-control" %>
   </div>
 
   <div class="form-group">

@@ -45,7 +45,7 @@ user4 = User.create!(
 puts "Creating listings..."
 listing1 = Listing.create!(
   name: "Policy Discussion with Jane",
-  type_of_event: "Meeting",  # Changed from 'type' which is a reserved word in Ruby
+  type_of_event: "meeting", # Changed from 'type' which is a reserved word in Ruby
   price: 150.00,
   location: "New York City",
   availability_start: DateTime.now + 1.day,
@@ -56,7 +56,7 @@ listing1 = Listing.create!(
 
 listing2 = Listing.create!(
   name: "Campaign Speech by John",
-  type_of_event: "Speech",  # Changed from 'type' which is a reserved word in Ruby
+  type_of_event: "speech",  # Changed from 'type' which is a reserved word in Ruby
   price: 500.00,
   location: "Washington DC",
   availability_start: DateTime.now + 2.days,
@@ -67,7 +67,7 @@ listing2 = Listing.create!(
 
 listing3 = Listing.create!(
   name: "Town Hall with Jane",
-  type_of_event: "Town Hall",  # Changed from 'type' which is a reserved word in Ruby
+  type_of_event: "debate",  # Changed from 'type' which is a reserved word in Ruby
   price: 300.00,
   location: "Boston",
   availability_start: DateTime.now + 5.days,
