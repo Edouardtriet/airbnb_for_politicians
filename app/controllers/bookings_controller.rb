@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_offering, only: [:new, :create]
+  before_action :set_listing, only: [:new, :create]
 
   def new
     @booking = Booking.new
@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(params[:booking])
-    @booking.offering = @offering
+    @booking.listing = @listing
     @booking.user = current_user
 
     if @booking.save
@@ -31,7 +31,7 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:date_start, :date_end, :name)
   end
 
-  def set_offering
-    @offering = Offering.find(params[:offering_id])
+  def set_listing
+    @listing = listing.find(params[:listing_id])
   end
 end

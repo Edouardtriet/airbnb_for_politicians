@@ -1,9 +1,9 @@
-<%= form_with(model: offering, local: true) do |form| %>
-  <% if offering.errors.any? %>
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
     <div class="alert alert-danger">
-      <h4><%= pluralize(offering.errors.count, "error") %> prohibited this offering from being saved:</h4>
+      <h4><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h4>
       <ul>
-        <% offering.errors.full_messages.each do |message| %>
+        <% listing.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

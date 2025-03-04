@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @offerings = @user.offerings
+    @listings = @user.listings
   end
 end

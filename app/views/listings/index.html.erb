@@ -1,0 +1,23 @@
+<!-- app/views/listings/index.html.erb -->
+<div class="container mt-5">
+  <h1>All listings</h1>
+
+  <div class="text-right mb-3">
+    <%= link_to "Add New listing", new_listing_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="row">
+    <% @listings.each do |listing| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= listing.name %></h5>
+            <p class="card-text"><%= listing.location %></p>
+            <p class="card-text">$<%= listing.price %> per night</p>
+            <%= link_to "View Details", listing_path(listing), class: "btn btn-sm btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
