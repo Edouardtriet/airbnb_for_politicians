@@ -1,2 +1,23 @@
-<h1>Offerings#index</h1>
-<p>Find me in app/views/offerings/index.html.erb</p>
+<!-- app/views/offerings/index.html.erb -->
+<div class="container mt-5">
+  <h1>All Offerings</h1>
+
+  <div class="text-right mb-3">
+    <%= link_to "Add New Offering", new_offering_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="row">
+    <% @offerings.each do |offering| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= offering.title %></h5>
+            <p class="card-text"><%= offering.location %></p>
+            <p class="card-text">$<%= offering.price %> per night</p>
+            <%= link_to "View Details", offering_path(offering), class: "btn btn-sm btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
