@@ -1,0 +1,36 @@
+<%= form_with(model: offering, local: true) do |form| %>
+  <% if offering.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(offering.errors.count, "error") %> prohibited this offering from being saved:</h4>
+      <ul>
+        <% offering.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 5, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
