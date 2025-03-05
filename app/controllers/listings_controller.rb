@@ -40,8 +40,15 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    redirect_to listings_path, status: :see_other
-  end
+      # Find the listing (handled by before_action :set_listing)
+      # Check if current user owns this listing
+    if @listing.user == current_user
+      @listing.destroy
+      redirect_to listings_path, notice: 'Listing was successfully deleted.'
+    else
+      # User doesn't own this listing
+      redirect_to listings_path, alert: 'You can only delete your own listings.'
+end
 
   private
 

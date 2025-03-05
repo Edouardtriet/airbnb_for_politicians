@@ -1,12 +1,233 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+// app/assets/stylesheets/components/_navbar.scss
+@import "../config/variables";
+@import "../config/mixins";
+
+// Navbar container
+.navbar {
+  background-color: $white;
+  box-shadow: $box-shadow;
+  padding: $navbar-padding 0;
+  position: relative;
+  width: 100%;
+
+  .container {
+    width: $container-width;
+    max-width: $max-width;
+    margin: 0 auto;
+    @include flex-center;
+    justify-content: space-between;
+  }
+
+  // Brand section
+  &-brand {
+    @include flex-center;
+  }
+
+  &-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-color;
+    text-decoration: none;
+    @include transition(color);
+
+    &:hover {
+      color: $primary-dark;
+    }
+  }
+
+  // Menu sections
+  &-menu {
+    @include flex-center;
+  }
+
+  &-end {
+    @include flex-center;
+    gap: $gap-size;
+  }
+
+  // Navigation items
+  &-item {
+    color: $text-color;
+    text-decoration: none;
+    padding: $item-padding;
+    border-radius: $border-radius;
+    @include transition;
+
+    &:hover {
+      color: $primary-color;
+      background-color: $primary-light;
+    }
+  }
+
+  // Mobile menu button
+  &-toggler {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+
+    &-icon {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: $text-color;
+      position: relative;
+      @include transition(background-color);
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 2px;
+        background-color: $text-color;
+        @include transition;
+      }
+
+      &::before {
+        top: -6px;
+      }
+
+      &::after {
+        bottom: -6px;
+      }
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: $mobile-breakpoint) {
+    &-toggler {
+      display: block;
+    }
+
+    &-menu {
+      display: none;
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: $white;
+      box-shadow: $box-shadow;
+      padding: $gap-size;
+
+      &.active {
+        display: block;
+      }
+    }
+
+    &-end {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+// Buttons
+.btn {
+  @include button-base;
+
+  &-primary {
+    background-color: $primary-color;
+    color: $white;
+    border: 1px solid $primary-color;
+
+    &:hover {
+      background-color: $primary-dark;
+      border-color: $primary-dark;
+      color: $white;
+    }
+  }
+
+  &-outline {
+    background-color: transparent;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+
+    &:hover {
+      background-color: $primary-light-hover;
+      color: $primary-color;
+    }
+  }
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+// Dropdown styles
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &-toggle {
+    @include flex-center;
+    cursor: pointer;
+    padding: $item-padding;
+    border-radius: $border-radius;
+    color: $text-color;
+
+    &:hover {
+      color: $primary-color;
+      background-color: $primary-light;
+    }
+  }
+
+  .arrow-down {
+    display: inline-block;
+    margin-left: 6px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid currentColor;
+  }
+
+  &-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: $white;
+    min-width: 180px;
+    box-shadow: $dropdown-shadow;
+    border-radius: $border-radius;
+    padding: 8px 0;
+    z-index: 1;
+  }
+
+  &:hover &-menu {
+    display: block;
+  }
+
+  &-item {
+    color: $text-color;
+    padding: $dropdown-item-padding;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    @include transition;
+    background: none;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    width: 100%;
+
+    &:hover {
+      background-color: $primary-light-hover;
+      color: $primary-color;
+    }
+  }
+
+  &-divider {
+    height: 1px;
+    margin: 8px 0;
+    background-color: $light-gray;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    width: 100%;
+
+    &-menu {
+      position: static;
+      box-shadow: none;
+      width: 100%;
+      padding-left: 15px;
+    }
+  }
 }
