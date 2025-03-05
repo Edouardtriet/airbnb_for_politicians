@@ -20,7 +20,7 @@ class ListingsController < ApplicationController
     if @listing.save
       redirect_to listing_path(@listing), notice: 'Listing was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
