@@ -61,6 +61,7 @@ group :development, :test do
   gem 'pry-byebug'        # Debugging
   gem 'rspec-rails'       # Testing framework
   gem 'factory_bot_rails' # Test data generation
+  gem 'dotenv-rails'      # Environment variables
 end
 
 
