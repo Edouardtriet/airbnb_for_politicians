@@ -48,7 +48,8 @@ class ListingsController < ApplicationController
     else
       # User doesn't own this listing
       redirect_to listings_path, alert: 'You can only delete your own listings.'
-end
+    end
+  end
 
   private
 

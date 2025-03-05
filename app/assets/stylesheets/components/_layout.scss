@@ -1,0 +1,102 @@
+// app/assets/stylesheets/components/_layout.scss
+@import "../config/variables";
+@import "../config/mixins";
+
+// Page container for all pages
+.page-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+// Page header for all pages
+.page-header {
+  margin-bottom: 40px;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: $text-color;
+    max-width: 700px;
+    margin: 0 auto 15px;
+  }
+}
+
+// Content section
+.page-content {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 30px;
+  margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    padding: 20px 15px;
+  }
+}
+
+// Action buttons
+.page-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin: 30px 0;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .btn {
+    @include button-base;
+    min-width: 150px;
+
+    &-primary {
+      background-color: $primary-color;
+      color: $white;
+
+      &:hover {
+        background-color: $primary-dark;
+      }
+    }
+
+    &-secondary {
+      background-color: $white;
+      color: $primary-color;
+      border: 1px solid $primary-color;
+
+      &:hover {
+        background-color: $primary-light;
+      }
+    }
+
+    &-danger {
+      background-color: #dc3545;
+      color: $white;
+      border: none;
+
+      &:hover {
+        background-color: darken(#dc3545, 10%);
+      }
+    }
+
+    &-link {
+      background: none;
+      color: $primary-color;
+      text-decoration: underline;
+      box-shadow: none;
+
+      &:hover {
+        color: $primary-dark;
+      }
+    }
+  }
+}
