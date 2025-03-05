@@ -32,6 +32,6 @@ class BookingsController < ApplicationController
   end
 
   def set_listing
-    @listing = listing.find(params[:listing_id])
+    @listing = Listing.find(params[:listing_id])
   end
 end

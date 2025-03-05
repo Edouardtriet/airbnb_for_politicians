@@ -1,0 +1,19 @@
+// app/assets/stylesheets/config/_mixins.scss
+
+@mixin transition($property: all, $duration: 0.3s) {
+  transition: $property $duration ease;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin button-base {
+  padding: 8px 16px;
+  border-radius: $border-radius;
+  text-align: center;
+  font-weight: 500;
+  @include transition;
+  text-decoration: none;
+}
