@@ -13,9 +13,11 @@
   .container {
     width: $container-width;
     max-width: $max-width;
-    margin: 0 auto;
+    margin: auto;
     @include flex-center;
     justify-content: space-between;
+    align-items: flex-start;
+    flex-grow: 1;
   }
 
   // Brand section

@@ -1,6 +1,7 @@
 // app/assets/stylesheets/components/_layout.scss
 @import "../config/variables";
 @import "../config/mixins";
+@import "../config/fonts";
 
 // Page container for all pages
 .page-container {
@@ -18,14 +19,17 @@
     font-size: 2.5rem;
     font-weight: 700;
     color: $primary-color;
-    margin-bottom: 15px;
   }
 
   p {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2rem;
     color: $text-color;
     max-width: 700px;
     margin: 0 auto 15px;
+  }
+  .mt-7 {
+    margin-top: 30px;
   }
 }
 
@@ -40,6 +44,26 @@
   @media (max-width: 768px) {
     padding: 20px 15px;
   }
+}
+
+a {
+  max-width: 400px;
+  display: block;
+  margin: 5px auto;
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    color: $primary-dark;
+    text-decoration: underline;
+  }
+}
+
+h2 {
+  max-width: 400px;
+  display: block;
+  margin: 10px auto;
 }
 
 // Action buttons
