@@ -35,6 +35,7 @@
 
 # Ignore .env file containing credentials.
 .env*
+!/env*.erb
 
 # Ignore Mac and Linux file system files
 *.swp

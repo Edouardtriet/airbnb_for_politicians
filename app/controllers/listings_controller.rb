@@ -58,7 +58,7 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-    params.require(:listing).permit(:name, :type_of_event, :price, :location, :availability_start, :availability_end, :picture)
+    params.require(:listing).permit(:name, :type_of_event, :price, :location, :availability_start, :availability_end, :image)
     # Changed :type to :type_of_event to match your renamed column
   end
 end
