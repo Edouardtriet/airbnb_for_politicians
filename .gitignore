@@ -9,7 +9,6 @@
 
 # Ignore all environment files (except templates).
 /.env*
-!/.env*.erb
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -36,7 +35,9 @@
 
 # Ignore .env file containing credentials.
 .env*
+!/env*.erb
 
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
+.env*

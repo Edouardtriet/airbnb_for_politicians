@@ -3,6 +3,11 @@
     <h1><%= @listing.name %></h1>
   </div>
 
+  <div class="listing-image">
+  <%= cl_image_tag @listing.image.key, height: 300, width: 200, crop: :fill%>
+
+  </div>
+
   <div class="listing-details">
     <p><strong>Event Type:</strong> <%= @listing.type_of_event.capitalize %></p>
     <p><strong>Location:</strong> <%= @listing.location %></p>

@@ -12,6 +12,9 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%= listing.name %></h5>
+            <div class="listing-image">
+              <%= cl_image_tag listing.image.key, height: 300, width: 200, crop: :fill if listing.image.attached?%>
+            </div>
             <p class="card-text"><%= listing.location %></p>
             <p class="card-text">$<%= listing.price %> per night</p>
             <%= link_to "View Details", listing_path(listing), class: "btn btn-sm btn-outline-primary" %>
