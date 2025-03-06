@@ -21,6 +21,13 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+
+    <%= f.input :profile_picture, as: :file, input_html: { direct_upload: true } %>
+
+    <% if resource.profile_picture.attached? %>
+      <div class="form-group">
+        <%= image_tag resource.profile_picture, width: 200 %>
+    <% end %>
   </div>
 
   <div class="form-actions">
