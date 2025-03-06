@@ -52,13 +52,6 @@
   max-width: 400px;
   text-align: center;
 
-  .price {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: $primary-color;
-    margin-bottom: 20px;
-  }
-
   .book-button {
     @include button-base;
     display: block;
@@ -72,6 +65,13 @@
       background-color: $primary-dark;
     }
   }
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: $primary-color;
+  margin-bottom: 20px;
 }
 
 // Listing action buttons
