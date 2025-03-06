@@ -1,2 +1,16 @@
 <div class="listing-card">
+  <div class="listing-card-name">
+   <%= image_tag listing.primary_image.variant(resize_to_fill: [300, 200]), alt: listing.name %>
+  </div>
+
+  <div class="listing-card-content">
+    <h3 class="listing-politician-name"><%= listing.name %></h3>
+    <div class="listing-details">
+      <span class="listing-location"><%= listing.location %></span>
+    </div>
+
+    <div class="listing-pricing">
+      <span class="price">$<%= number_with_delimiter(listing.price) %></span>
+    </div>
+  </div>
 </div>
