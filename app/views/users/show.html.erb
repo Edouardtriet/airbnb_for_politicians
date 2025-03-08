@@ -1,2 +1,46 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+  <h1>User Profile</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <% if @user.profile_picture.attached? %>
+        <%= cl_image_tag(@user.profile_picture.key, width: 200, height: 200, crop: :fill, class: "img-fluid rounded-circle") %>
+      <% else %>
+        <%= image_tag("default_profile.png", width: 200, height: 200, class: "img-fluid rounded-circle") %>
+      <% end %>
+    </div>
+
+    <div class="col-md-8">
+      <h2><%= @user.email %></h2>
+      <p>Member since: <%= @user.created_at.strftime("%B %Y") %></p>
+
+      <h3>Listings</h3>
+      <% if @user.listings.any? %>
+        <ul>
+          <% @user.listings.each do |listing| %>
+            <li><%= link_to "Listing ##{listing.id}", listing_path(listing) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>This user has no listings yet.</p>
+      <% end %>
+
+      <h3>Bookings</h3>
+      <% if @user.bookings.any? %>
+        <ul>
+          <% @user.bookings.each do |booking| %>
+            <li><%= link_to "Booking ##{booking.id}", booking_path(booking) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>This user has no bookings yet.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <% if current_user == @user %>
+    <div class="mt-4">
+      <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

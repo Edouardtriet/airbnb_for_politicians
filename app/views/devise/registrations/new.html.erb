@@ -17,6 +17,17 @@
                 input_html: { autocomplete: "new-password" } %>
   </div>
 
+  <div class="form-inputs">
+  <%= f.input :profile_picture, as: :file %>
+  </div>
+
+  <% if resource.profile_picture.attached? %>
+    <div class="form-group">
+      <%= cl_image_tag(resource.profile_picture.key, width: 100, height: 100, crop: :fill) %>
+      <%= f.input :remove_profile_picture, as: :boolean, label: "Remove profile picture" %>
+    </div>
+    <% end %>
+
   <div class="form-actions">
     <%= f.button :submit, "Sign up" %>
   </div>
