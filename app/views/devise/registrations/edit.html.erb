@@ -1,6 +1,6 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -22,11 +22,17 @@
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
 
-    <%= f.input :profile_picture, as: :file, input_html: { direct_upload: true } %>
+    <%= f.input :profile_picture, as: :file %>
 
     <% if resource.profile_picture.attached? %>
       <div class="form-group">
-        <%= image_tag resource.profile_picture, width: 200 %>
+        <% if resource.profile_picture.blob&.persisted? %>
+          <%= image_tag resource.profile_picture.representation(resize_to_limit: [200, 200]) %>
+        <% else %>
+          <p>Your new profile picture will be visible after saving</p>
+        <% end %>
+        <%= f.input :remove_profile_picture, as: :boolean, label: "Remove profile picture" %>
+      </div>
     <% end %>
   </div>
 
