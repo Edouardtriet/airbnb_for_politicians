@@ -17,7 +17,7 @@
   h1 {
     font-size: 2.5rem;
     font-weight: 600;
-    color: $primary-color;
+    color: #064E3B;
     margin-bottom: 15px;
   }
 }
@@ -107,12 +107,12 @@
     }
 
     &-danger {
-      background-color: #dc3545;
+      background-color: #e37690;
       color: $white;
       border: none;
 
       &:hover {
-        background-color: darken(#dc3545, 10%);
+        background-color: darken(#e55d7c, 10%);
       }
     }
 
