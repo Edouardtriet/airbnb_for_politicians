@@ -17,7 +17,6 @@
           <div class="navbar-item dropdown">
             <a class="dropdown-toggle">
               <%= current_user.name || current_user.email %>
-              <i class="arrow-down"></i>
             </a>
             <div class="dropdown-menu">
               <%= link_to "My Profile", user_path(current_user), class: "dropdown-item" %>

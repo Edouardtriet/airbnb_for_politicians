@@ -67,7 +67,7 @@
           <h2>My Bookings</h2>
         </div>
         <div class="card-body">
-          <% if @bookings.any? %>
+          <% if @bookings.where.not(status: "canceled").any? %>
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -79,7 +79,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @bookings.each do |booking| %>
+                  <% @bookings.where.not(status: "canceled").each do |booking| %>
                     <tr>
                       <td>
                         <% if booking.listing %>
@@ -108,10 +108,12 @@
                       </td>
                       <td class="action-buttons">
                         <%= link_to "View", booking_path(booking), class: "btn btn-info btn-sm" %>
-                        <%= link_to "Cancel", booking_path(booking),
-                            method: :delete,
-                            data: { confirm: "Are you sure you want to cancel this booking?" },
-                            class: "btn btn-danger btn-sm" %>
+                        <% unless booking.status == "canceled" %>
+                          <%= button_to "Cancel", cancel_booking_path(booking),
+                              method: :patch,
+                              data: { confirm: "Are you sure you want to cancel this booking?" },
+                              class: "btn btn-danger btn-sm" %>
+                        <% end %>
                       </td>
                     </tr>
                   <% end %>

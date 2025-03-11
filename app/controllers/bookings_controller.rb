@@ -1,8 +1,8 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_listing, only: [:new, :create]
-  before_action :set_booking, only: [:show, :destroy]
-  before_action :check_booking_owner, only: [:destroy]
+  before_action :set_booking, only: [:show, :cancel]
+  before_action :check_booking_owner, only: [:cancel]
 
   def new
     @booking = Booking.new
@@ -34,17 +34,20 @@ class BookingsController < ApplicationController
     authorize_booking_access(@booking)
   end
 
-  def destroy
+  def cancel
     @booking = Booking.find(params[:id])
 
-    # Only allow user to delete their own bookings
+    # Only allow users to cancel their own bookings
     if @booking.user != current_user
       redirect_to dashboard_path, alert: "You can only cancel your own bookings."
       return
     end
 
-    if @booking.destroy
-      redirect_to dashboard_path, notice: 'Booking was successfully cancelled.'
+    # Update status instead of destroying
+    @booking.status = "canceled"
+
+    if @booking.save
+      redirect_to dashboard_path, notice: 'Booking was successfully canceled.'
     else
       redirect_to dashboard_path, alert: 'Unable to cancel booking.'
     end
