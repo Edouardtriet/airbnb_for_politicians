@@ -24,31 +24,24 @@
             </div>
           </div>
 
-          <%= form_with(model: [@listing, @booking], local: true) do |f| %>
-            <div class="form-group mb-3">
-              <%= f.label :date_start, "Start Date" %>
-              <%= f.date_field :date_start, class: "form-control", required: true, min: Date.today %>
+         <%= simple_form_for [@listing, @booking] do |f|%>
+            <div class="form-group">
+              <%= f.input :date_start, as: :date, label: "Start Date", input_html: { class: "form-control" } %>
             </div>
 
-            <div class="form-group mb-3">
-              <%= f.label :date_end, "End Date" %>
-              <%= f.date_field :date_end, class: "form-control", required: true, min: Date.today %>
+            <div class="form-group">
+              <%= f.input :date_end, as: :date, label: "End Date", input_html: { class: "form-control" } %>
             </div>
 
-            <div class="form-group mb-3">
-              <%= f.label :name, "Your Name" %>
-              <%= f.text_field :name, class: "form-control", placeholder: "Enter your name", value: current_user.name, required: true %>
+            <div class="form-group">
+              <%= f.input :special_requests, label: "Special request", input_html: { class: "form-control" } %>
             </div>
 
-            <div class="form-group mb-3">
-              <%= f.label :special_requests, "Special Requests (Optional)" %>
-              <%= f.text_area :special_requests, class: "form-control", rows: 3, placeholder: "Any special requirements or notes for your booking" %>
+            <div class="form-group">
+              <%= f.button :submit, "Book Now", class: "btn btn-primary" %>
             </div>
 
-            <div class="d-grid gap-2">
-              <%= f.submit "Confirm Booking", class: "btn btn-success btn-lg" %>
-            </div>
-          <% end %>
+         <% end %>
         </div>
 
         <div class="card-footer text-center">
