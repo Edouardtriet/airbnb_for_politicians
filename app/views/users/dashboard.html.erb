@@ -1,0 +1,69 @@
+<!-- app/views/users/dashboard.html.erb -->
+<div class="container dashboard">
+  <h1>My Dashboard</h1>
+
+  <div class="row">
+    <!-- User profile information -->
+    <div class="col-md-4">
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h2>My Profile</h2>
+        </div>
+        <div class="card-body">
+          <!-- Replace this line -->
+          <p><strong>Name:</strong> <%= @user&.name.present? ? @user.name : "Not provided" %></p>
+          <!-- Replace this line -->
+          <p><strong>Email:</strong> <%= @user&.email %></p>
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <!-- My Listings Section -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h2>My Listings</h2>
+          <%= link_to "Create New Listing", new_listing_path, class: "btn btn-success btn-sm" %>
+        </div>
+        <div class="card-body">
+          <% if @listings.any? %>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @listings.each do |listing| %>
+                    <tr>
+                      <td><%= listing.name %></td>
+                      <td><%= listing.type_of_event %></td>
+                      <td>$<%= listing.price %></td>
+                      <td><%= listing.location %></td>
+                      <td class="action-buttons">
+                        <%= link_to "View", listing_path(listing), class: "btn btn-info btn-sm" %>
+                        <%= link_to "Edit", edit_listing_path(listing), class: "btn btn-warning btn-sm" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <p class="text-muted">You haven't created any listings yet.</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Rest of the content remains the same as in previous response -->
+      <!-- My Bookings Section and Received Bookings Section -->
+      <!-- ... -->
+    </div>
+  </div>
+</div>
