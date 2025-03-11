@@ -9,12 +9,13 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(params[booking_params])
+    @booking = Booking.new(booking_params)
     @booking.listing = @listing
     @booking.user = current_user
     @booking.status = "pending" if @booking.respond_to?(:status)
 
-    raise
+    @booking.date_start = Date.parse(params[:booking][:date_start]) if params[:booking][:date_start].is_a?(String)
+    @booking.date_end = Date.parse(params[:booking][:date_end]) if params[:booking][:date_end].is_a?(String)
 
     if @booking.save
       redirect_to booking_path(@booking), notice: 'Booking request was successfully submitted.'
