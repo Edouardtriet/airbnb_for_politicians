@@ -1,2 +1,60 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h2 class="mb-0">Book a Session with <%= @listing.name %></h2>
+        </div>
+
+        <div class="card-body">
+          <div class="row mb-4">
+          <div class="col-md-4">
+            <% if @listing.image.attached? %>
+              <%= image_tag @listing.image, class: "img-fluid rounded" %>
+            <% else %>
+              <div class="bg-light text-center p-4 rounded">No Image Available</div>
+            <% end %>
+        </div>
+
+            <div class="col-md-8">
+              <h4><%= @listing.name %></h4>
+              <p><strong>Event Type:</strong> <%= @listing.type_of_event %></p>
+              <p><strong>Location:</strong> <%= @listing.location %></p>
+              <p><strong>Price:</strong> $<%= @listing.price %> per night</p>
+            </div>
+          </div>
+
+          <%= form_with(model: [@listing, @booking], local: true) do |f| %>
+            <div class="form-group mb-3">
+              <%= f.label :date_start, "Start Date" %>
+              <%= f.date_field :date_start, class: "form-control", required: true, min: Date.today %>
+            </div>
+
+            <div class="form-group mb-3">
+              <%= f.label :date_end, "End Date" %>
+              <%= f.date_field :date_end, class: "form-control", required: true, min: Date.today %>
+            </div>
+
+            <div class="form-group mb-3">
+              <%= f.label :name, "Your Name" %>
+              <%= f.text_field :name, class: "form-control", placeholder: "Enter your name", value: current_user.name, required: true %>
+            </div>
+
+            <div class="form-group mb-3">
+              <%= f.label :special_requests, "Special Requests (Optional)" %>
+              <%= f.text_area :special_requests, class: "form-control", rows: 3, placeholder: "Any special requirements or notes for your booking" %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= f.submit "Confirm Booking", class: "btn btn-success btn-lg" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="card-footer text-center">
+          <%= link_to "Cancel and return to listing", listing_path(@listing), class: "text-muted" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

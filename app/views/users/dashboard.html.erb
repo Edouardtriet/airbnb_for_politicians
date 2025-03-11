@@ -61,9 +61,121 @@
         </div>
       </div>
 
-      <!-- Rest of the content remains the same as in previous response -->
-      <!-- My Bookings Section and Received Bookings Section -->
-      <!-- ... -->
+      <!-- My Bookings Section (bookings made by the user) -->
+      <div class="dashboard-card mt-4">
+        <div class="card-header">
+          <h2>My Bookings</h2>
+        </div>
+        <div class="card-body">
+          <% if @bookings.any? %>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Politician/Service</th>
+                    <th>Dates</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @bookings.each do |booking| %>
+                    <tr>
+                      <td>
+                        <% if booking.listing %>
+                          <%= booking.listing.name %>
+                        <% else %>
+                          <span class="text-muted">Listing no longer available</span>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if booking.date_start && booking.date_end %>
+                          <%= booking.date_start.strftime("%b %d, %Y") %> - <%= booking.date_end.strftime("%b %d, %Y") %>
+                        <% elsif booking.date_start %>
+                          <%= booking.date_start.strftime("%b %d, %Y") %>
+                        <% else %>
+                          <span class="text-muted">Dates not specified</span>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if booking.respond_to?(:status) && booking.status.present? %>
+                          <span class="badge <%= booking_status_badge_class(booking.status) %>">
+                            <%= booking.status.humanize %>
+                          </span>
+                        <% else %>
+                          <span class="badge bg-secondary">Pending</span>
+                        <% end %>
+                      </td>
+                      <td class="action-buttons">
+                        <%= link_to "View", booking_path(booking), class: "btn btn-info btn-sm" %>
+                        <%= link_to "Cancel", booking_path(booking),
+                            method: :delete,
+                            data: { confirm: "Are you sure you want to cancel this booking?" },
+                            class: "btn btn-danger btn-sm" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <p class="text-muted">You haven't made any bookings yet.</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Received Bookings Section (bookings made for the user's listings) -->
+      <% if @received_bookings.any? %>
+        <div class="dashboard-card mt-4">
+          <div class="card-header">
+            <h2>Bookings for My Services</h2>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Client</th>
+                    <th>Service</th>
+                    <th>Dates</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @received_bookings.each do |booking| %>
+                    <tr>
+                      <td><%= booking.user.name %></td>
+                      <td><%= booking.listing.name %></td>
+                      <td>
+                        <% if booking.date_start && booking.date_end %>
+                          <%= booking.date_start.strftime("%b %d, %Y") %> - <%= booking.date_end.strftime("%b %d, %Y") %>
+                        <% elsif booking.date_start %>
+                          <%= booking.date_start.strftime("%b %d, %Y") %>
+                        <% else %>
+                          <span class="text-muted">Dates not specified</span>
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if booking.respond_to?(:status) && booking.status.present? %>
+                          <span class="badge <%= booking_status_badge_class(booking.status) %>">
+                            <%= booking.status.humanize %>
+                          </span>
+                        <% else %>
+                          <span class="badge bg-secondary">Pending</span>
+                        <% end %>
+                      </td>
+                      <td class="action-buttons">
+                        <%= link_to "View", booking_path(booking), class: "btn btn-info btn-sm" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
