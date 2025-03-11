@@ -39,7 +39,7 @@
             <div class="col-md-6">
               <p><strong>Check-in Date:</strong> <%= @booking.date_start.strftime("%A, %B %d, %Y") %></p>
               <p><strong>Check-out Date:</strong> <%= @booking.date_end.strftime("%A, %B %d, %Y") %></p>
-              <p><strong>Number of Nights:</strong> <%= (@booking.date_end - @booking.date_start).to_i %></p>
+              <p><strong>Number of Nights:</strong> <%= (@booking.date_end.to_date - @booking.date_start.to_date).to_i %></p>
             </div>
             <div class="col-md-6">
               <p><strong>Booked on:</strong> <%= @booking.created_at.strftime("%B %d, %Y") %></p>
@@ -60,22 +60,22 @@
           <div class="table-responsive">
             <table class="table table-borderless">
               <tbody>
+                <% days = (@booking.date_end.to_date - @booking.date_start.to_date).to_i %>
                 <tr>
-                  <td>$<%= @booking.listing.price %> x <%= (@booking.date_end - @booking.date_start).to_i %></td>
-                  <td class="text-right">$<%= @booking.listing.price * (@booking.date_end - @booking.date_start).to_i %></td>
+                  <td>$<%= @booking.listing.price %> x <%= days %> days</td>
+                  <td class="text-right">$<%= @booking.listing.price * days %></td>
                 </tr>
                 <tr>
                   <td>Service fee</td>
-                  <td class="text-right">$<%= (@booking.listing.price * (@booking.date_end - @booking.date_start).to_i * 0.1).round(2) %></td>
+                  <td class="text-right">$<%= (@booking.listing.price * days * 0.1).round(2) %></td>
                 </tr>
                 <tr class="font-weight-bold">
                   <td>Total</td>
-                  <td class="text-right">$<%= (@booking.listing.price * (@booking.date_end - @booking.date_start).to_i * 1.1).round(2) %></td>
+                  <td class="text-right">$<%= (@booking.listing.price * days * 1.1).round(2) %></td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
 
         <!-- Card footer with actions -->
         <div class="card-footer">

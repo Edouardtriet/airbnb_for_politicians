@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # Dashboard routes - keep just one clear definition
+  get 'dashboard', to: 'users#dashboard', as: 'dashboard'
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # If you still need the users/dashboard route specifically, keep it
+  # But generally it's better to have just one route to the same action
   get 'users/dashboard', to: 'users#dashboard', as: 'user_dashboard'
+
+  resources :users, only: [:show]
 
   resources :listings, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :bookings, only: [:new, :create]
   end
 
-  resources :bookings, only: [:index, :show, :edit, :update, :destroy]
-  get 'dashboard', to: 'users#dashboard', as: 'dashboard'
+  resources :bookings, only: [:index, :show, :edit, :update, :destroy] do
+    member do
+      patch :cancel
+    end
+  end
 
-  resources :users, only: [:show]
+  # Health check route
+  get "up" => "rails/health#show", as: :rails_health_check
 end
