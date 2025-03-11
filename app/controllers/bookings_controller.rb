@@ -14,6 +14,8 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = "pending" if @booking.respond_to?(:status)
 
+    raise
+
     if @booking.save
       redirect_to booking_path(@booking), notice: 'Booking request was successfully submitted.'
     else
@@ -50,7 +52,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:date_start, :date_end, :name, :special_requests)
+    params.require(:booking).permit(:date_start, :date_end, :special_requests)
   end
 
   def set_listing
