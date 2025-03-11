@@ -10,36 +10,36 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :name %>
+  <div class="form-group mb-3">
+    <%= form.label :name, class: "fw-bold mb-2"%>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :type_of_event, "Event Type" %>
+  <div class="form-group mb-3">
+    <%= form.label :type_of_event, "Event Type", class: "fw-bold mb-2" %>
     <%= form.select :type_of_event,
                    Listing.type_of_events.keys.map { |type| [type.humanize, type] },
                    { include_blank: "Select an event type" },
                    { class: "form-control" } %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :price %>
+  <div class="form-group mb-3">
+    <%= form.label :price, class: "fw-bold mb-2" %>
     <%= form.number_field :price, step: 1, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :location %>
+  <div class="form-group mb-3">
+    <%= form.label :location, class: "fw-bold mb-2" %>
     <%= form.text_field :location, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :image %>
+  <div class="form-group mb-4">
+    <%= form.label :image, class: "fw-bold mb-2" %>
     <%= form.file_field :image, class: "form-control" %>
   </div>
 
   <% if listing.image.attached? %>
-    <div class="form-group">
+    <div class="form-group mb-3">
       <% cl_image_tag(listing.image.key, width: 400, height: 400, crop: :fill) %>
       <%= form.check_box :remove_image %>
       <%= form.label :remove_image, "Remove image" %>

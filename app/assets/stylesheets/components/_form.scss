@@ -1,19 +1,47 @@
-.simple_form.new_user {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.form-group {
+  margin-bottom: 1rem;
 
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  &.mb-3 {
+    margin-bottom: 1.5rem;
+  }
 
+  &.mb-4 {
+    margin-bottom: 2rem;
+  }
 }
 
-.btn {
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.form-control {
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  border: 1px solid $input-border;
+  font-size: 1rem;
+
+  &:focus {
+    border-color: $input-focus-border;
+    box-shadow: 0 0 0 0.2rem $input-focus-shadow;
+  }
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+// Form buttons
+.btn-success {
+  background-color: $btn-success-bg;
+  border-color: $btn-success-bg;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.btn-outline-secondary {
+  color: $secondary-text;
+  border-color: $input-border;
+  background-color: white;
+  padding: 0.6rem 1.5rem;
+  font-weight: normal;
 }
