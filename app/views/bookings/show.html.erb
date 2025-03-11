@@ -1,2 +1,119 @@
-<h1>Bookings#show</h1>
-<p>Find me in app/views/bookings/show.html.erb</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card shadow">
+        <!-- Header with booking status -->
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Booking #<%= @booking.id %></h2>
+            <span class="badge badge-<%= @booking.status == 'confirmed' ? 'success' : (@booking.status == 'pending' ? 'warning' : 'danger') %> p-2">
+              <%= @booking.status.capitalize %>
+            </span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Listing details section -->
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <% if @booking.listing.image.attached? %>
+                <%= image_tag @booking.listing.image, class: "img-fluid rounded" %>
+              <% else %>
+                <div class="bg-light text-center p-4 rounded">No Image Available</div>
+              <% end %>
+            </div>
+
+            <div class="col-md-8">
+              <h4><%= link_to @booking.listing.name, listing_path(@booking.listing) %></h4>
+              <p><strong>Event Type:</strong> <%= @booking.listing.type_of_event %></p>
+              <p><strong>Location:</strong> <%= @booking.listing.location %></p>
+              <p><strong>Price:</strong> $<%= @booking.listing.price %></p>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Booking details section -->
+          <h4 class="mb-3">Booking Details</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>Check-in Date:</strong> <%= @booking.date_start.strftime("%A, %B %d, %Y") %></p>
+              <p><strong>Check-out Date:</strong> <%= @booking.date_end.strftime("%A, %B %d, %Y") %></p>
+              <p><strong>Number of Nights:</strong> <%= (@booking.date_end - @booking.date_start).to_i %></p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Booked on:</strong> <%= @booking.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+          </div>
+
+          <% if @booking.special_requests.present? %>
+            <div class="alert alert-info mt-3">
+              <h5>Special Requests:</h5>
+              <p><%= @booking.special_requests %></p>
+            </div>
+          <% end %>
+
+          <hr>
+
+          <!-- Price calculation section -->
+          <h4 class="mb-3">Price Details</h4>
+          <div class="table-responsive">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td>$<%= @booking.listing.price %> x <%= (@booking.date_end - @booking.date_start).to_i %></td>
+                  <td class="text-right">$<%= @booking.listing.price * (@booking.date_end - @booking.date_start).to_i %></td>
+                </tr>
+                <tr>
+                  <td>Service fee</td>
+                  <td class="text-right">$<%= (@booking.listing.price * (@booking.date_end - @booking.date_start).to_i * 0.1).round(2) %></td>
+                </tr>
+                <tr class="font-weight-bold">
+                  <td>Total</td>
+                  <td class="text-right">$<%= (@booking.listing.price * (@booking.date_end - @booking.date_start).to_i * 1.1).round(2) %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Card footer with actions -->
+        <div class="card-footer">
+          <div class="d-flex justify-content-between">
+            <!-- Guest actions -->
+            <% if @booking.user == current_user %>
+              <div>
+                <% if @booking.status != 'canceled' && @booking.date_start > Date.today %>
+                  <%= button_to "Cancel Booking", booking_path(@booking), method: :delete, data: { confirm: "Are you sure you want to cancel this booking?" }, class: "btn btn-danger" %>
+                <% end %>
+              </div>
+              <div>
+                <%= link_to "Back to My Bookings", dashboard_path, class: "btn btn-secondary" %>
+              </div>
+            <% end %>
+
+            <!-- Host actions -->
+            <% if @booking.listing.user == current_user %>
+              <div>
+                <% if @booking.status == 'pending' %>
+                  <div class="btn-group">
+                    <%= form_with url: booking_confirm_path(@booking), method: :patch do |f| %>
+                      <%= f.submit "Confirm Booking", class: "btn btn-success mr-2" %>
+                    <% end %>
+
+                    <%= form_with url: booking_reject_path(@booking), method: :patch do |f| %>
+                      <%= f.submit "Reject Booking", class: "btn btn-danger" %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+              <div>
+                <%= link_to "Back to My Listings", dashboard_path, class: "btn btn-secondary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
