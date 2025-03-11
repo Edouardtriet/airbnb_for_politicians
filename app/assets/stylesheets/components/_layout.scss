@@ -72,17 +72,17 @@ h2 {
 }
 
 .feature-list-container {
-  width: 80%; /* Adjust to your preference */
-  margin: 0 auto; /* This centers the container */
-  text-align: left; /* This aligns the text to the left */
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
 }
 
 
 .feature-list-container li {
   margin-bottom: 10px;
-  padding-left: 1.5em; /* Space for the bullet */
-  text-indent: -1.5em; /* Pulls the first line back */
-  padding-right: 0; /* Reset any existing right padding */
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+  padding-right: 0;
 }
 
 
@@ -148,7 +148,7 @@ h2 {
 .page-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers items horizontally */
+  align-items: center;
   width: 100%;
 }
 
