@@ -3,19 +3,24 @@
     <h1><%= @listing.name %></h1>
   </div>
 
-  <div class="listing-image">
-    <% if @listing.image.attached? %>
-      <%= cl_image_tag @listing.image.key, height: 300, width: 200, crop: :fill %>
-    <% else %>
-      <div class="placeholder-image">
-        <!-- You could use a default placeholder image instead -->
-        <p>No image available</p>
+  <div class="listing-image-wrapper">
+    <div class="listing-image">
+      <% if @listing.image.attached? %>
+        <%= cl_image_tag @listing.image.key, crop: :fill %>
+      <% else %>
+        <div class="placeholder-image">
+          <p>No image available</p>
+        </div>
+      <% end %>
+
+      <div class="event-type-badge">
+        <%= @listing.type_of_event %>
       </div>
-    <% end %>
+    </div>
   </div>
 
   <div class="listing-details">
-    <p><strong>Event Type:</strong> <%= @listing.type_of_event.capitalize %></p>
+    <p><strong>Event Type:</strong> <%= @listing.type_of_event %></p>
     <p><strong>Location:</strong> <%= @listing.location %></p>
     <% if @listing.availability_start && @listing.availability_end %>
       <p>
@@ -26,11 +31,11 @@
     <% end %>
   </div>
 
-  <div class="listing-details">
+  <div class="listing-price">
     <div class="price"><%= number_to_currency(@listing.price) %> per night</div>
 
     <% if user_signed_in? && current_user != @listing.user %>
-      <%= link_to "Book Now", new_listing_booking_path(@listing), class: "btn btn-primary" %>
+      <%= link_to "Book Now", new_listing_booking_path(@listing), class: "book-button" %>
     <% end %>
   </div>
 
@@ -42,6 +47,6 @@
           class: "btn btn-danger" %>
     <% end %>
 
-    <%= link_to "Back to All listings", listings_path, class: "btn btn-primary" %>
+    <%= link_to "Back to All listings", listings_path, class: "btn btn-link" %>
   </div>
 </div>
