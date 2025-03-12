@@ -54,6 +54,7 @@ gem "sassc-rails"
 gem 'devise'              # User authentication
 gem 'pundit'              # Authorization
 gem 'cloudinary'          # Image hosting
+gem 'activestorage-cloudinary-service'
 
 # Development/testing gems
 group :development, :test do

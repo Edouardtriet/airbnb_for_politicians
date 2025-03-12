@@ -58,6 +58,7 @@
     &:hover {
       color: $primary-color;
       background-color: $primary-light;
+      text-decoration: none;
     }
   }
 
@@ -149,6 +150,7 @@
     &:hover {
       background-color: $white;
       color: $primary-color;
+      text-decoration: none;
     }
   }
 }
@@ -168,6 +170,7 @@
     &:hover {
       color: $primary-color;
       background-color: $primary-light;
+      text-decoration: none;
     }
   }
 
@@ -213,6 +216,7 @@
     &:hover {
       background-color: $primary-light-hover;
       color: $primary-color;
+      text-decoration: none;
     }
   }
 
