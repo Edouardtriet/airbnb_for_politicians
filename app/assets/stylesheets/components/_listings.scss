@@ -4,15 +4,6 @@
 @import "../config/variables";
 @import "../config/mixins";
 
-// =============================================================================
-// LISTING CARD COMPONENT
-// =============================================================================
-// This component displays individual politician listings/events on the homepage
-// and search results pages. Each card shows key details about what the
-// politician is offering.
-// =============================================================================
-
-// Main container for the listing card
 .listing-card {
   background-color: $white; // White background for the card
   border-radius: $border-radius; // Rounded corners from variables.scss
@@ -134,5 +125,56 @@
   // Single column on mobile
   @media (max-width: 576px) {
     grid-template-columns: 1fr; // One column on small screens
+  }
+}
+
+
+// Details grid layout for single listing view
+.listing-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; // Two equal columns
+  gap: 30px;
+
+  @media (max-width: $mobile-breakpoint) {
+    grid-template-columns: 1fr; // One column on mobile
+  }
+}
+
+// Image container for single listing view
+.listing-image-container {
+  position: relative;
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  .listing-main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .placeholder-image {
+    background-color: $light-gray;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $secondary-text;
+  }
+}
+
+// Information section styling
+.listing-info {
+  .info-label {
+    font-weight: 600;
+    color: $text-color;
+    margin-right: 5px;
+  }
+
+  .info-value {
+    color: $text-color;
+  }
+
+  .listing-info-section {
+    margin-bottom: 20px;
   }
 }

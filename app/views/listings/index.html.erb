@@ -6,45 +6,36 @@
     <%= link_to "Add New listing", new_listing_path, class: "btn btn-primary" %>
   </div>
 
-  <!-- Changed from row to listing-cards-grid for the CSS Grid layout -->
   <div class="listing-cards-grid">
     <% @listings.each do |listing| %>
-      <!-- Removed the col-md-4 Bootstrap column in favor of CSS Grid -->
-      <!-- Changed from card to listing-card class -->
       <div class="listing-card">
-
-        <!-- Added the listing-card-image container for the image section -->
+        <!-- Image section - remove any title/text from here -->
         <div class="listing-card-image">
           <% if listing.image.attached? %>
             <%= cl_image_tag listing.image.key, crop: :fill %>
           <% else %>
-            <!-- Fallback image if no image is attached -->
-            <img src="https://via.placeholder.com/300x200" alt="<%= listing.name %>">
+            <!-- Use a nicer default image without text -->
+            <img src="https://via.placeholder.com/300x200?text=" alt="">
           <% end %>
 
-          <!-- Added event type badge that shows the type of event -->
           <div class="event-type-badge">
             <%= listing.type_of_event %>
           </div>
         </div>
 
-        <!-- Added the listing-card-content container for text content -->
         <div class="listing-card-content">
-          <!-- Changed from card-title to listing-card-name -->
+          <!-- Keep only this title, remove any other instances -->
           <h5 class="listing-card-name"><%= listing.name %></h5>
 
-          <!-- Changed to listing-card-location with icon structure -->
           <div class="listing-card-location">
-            <span class="location-icon">📍</span> <!-- Simple location icon -->
+            <span class="location-icon">📍</span>
             <%= listing.location %>
           </div>
 
-          <!-- Changed to listing-card-price -->
           <div class="listing-card-price">
             $<%= listing.price %> per night
           </div>
 
-          <!-- Added availability information section -->
           <div class="listing-card-availability">
             Available:
             <span class="date-range">
@@ -54,11 +45,11 @@
           </div>
         </div>
 
-        <!-- Added listing-card-footer for the action button -->
         <div class="listing-card-footer">
-          <%= link_to "View Details", listing_path(listing), class: "btn btn-primary" %>
+          <div style="padding: 0 20px 20px 20px;">
+            <%= link_to "View Details", listing_path(listing), class: "btn btn-primary" %>
+          </div>
         </div>
-
       </div>
     <% end %>
   </div>
