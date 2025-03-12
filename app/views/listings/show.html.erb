@@ -48,11 +48,13 @@
       <% if user_signed_in? && current_user == @listing.user %>
         <%= link_to "Edit", edit_listing_path(@listing), class: "btn-edit" %>
         <%= button_to "Delete", listing_path(@listing), method: :delete,
-            data: { confirm: "Are you sure you want to delete this listing?" },
+            data: { turbo_confirm: "Are you sure you want to delete this listing?" },
             class: "btn-delete" %>
+      <% elsif user_signed_in? && current_user != @listing.user %>
+        <%= link_to "Book Now", new_listing_booking_path(@listing), class: "btn btn-primary" %>
       <% end %>
-      <%= button_to "Book Now", new_listing_booking_path(@listing), class: "btn btn-primary" %>
-      <%= button_to "Back to All listings", listings_path, class: "btn-back" %>
+
+      <%= link_to "Back to All listings", listings_path, class: "btn-back" %>
     </div>
   </div>
 </div>
