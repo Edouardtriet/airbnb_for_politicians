@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index, :show, :edit, :update, :destroy] do
     member do
       patch :cancel
+      patch :confirm
+      patch :reject
     end
   end
 
