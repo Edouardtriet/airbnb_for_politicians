@@ -53,6 +53,28 @@ class BookingsController < ApplicationController
     end
   end
 
+    def confirm
+    @booking = Booking.find(params[:id])
+
+    if @booking.listing.user == current_user
+      @booking.update(status: "confirmed")
+      redirect_to dashboard_path, notice: 'Booking was successfully confirmed.'
+    else
+      redirect_to dashboard_path, alert: "You don't have permission to confirm this booking."
+    end
+  end
+
+    def reject
+     @booking = Booking.find(params[:id])
+
+     if @booking.listing.user == current_user
+       @booking.update(status: "canceled")
+       redirect_to dashboard_path, notice: 'Booking was successfully rejected.'
+     else
+       redirect_to dashboard_path, alert: "You don't have permission to reject this booking."
+     end
+   end
+
   private
 
   def booking_params
