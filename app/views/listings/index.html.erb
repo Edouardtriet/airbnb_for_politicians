@@ -6,20 +6,59 @@
     <%= link_to "Add New listing", new_listing_path, class: "btn btn-primary" %>
   </div>
 
-  <div class="row">
+  <!-- Changed from row to listing-cards-grid for the CSS Grid layout -->
+  <div class="listing-cards-grid">
     <% @listings.each do |listing| %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><%= listing.name %></h5>
-            <div class="listing-image">
-              <%= cl_image_tag listing.image.key, height: 300, width: 200, crop: :fill if listing.image.attached?%>
-            </div>
-            <p class="card-text"><%= listing.location %></p>
-            <p class="card-text">$<%= listing.price %> per night</p>
-            <%= link_to "View Details", listing_path(listing), class: "btn btn-sm btn-outline-primary" %>
+      <!-- Removed the col-md-4 Bootstrap column in favor of CSS Grid -->
+      <!-- Changed from card to listing-card class -->
+      <div class="listing-card">
+
+        <!-- Added the listing-card-image container for the image section -->
+        <div class="listing-card-image">
+          <% if listing.image.attached? %>
+            <%= cl_image_tag listing.image.key, crop: :fill %>
+          <% else %>
+            <!-- Fallback image if no image is attached -->
+            <img src="https://via.placeholder.com/300x200" alt="<%= listing.name %>">
+          <% end %>
+
+          <!-- Added event type badge that shows the type of event -->
+          <div class="event-type-badge">
+            <%= listing.type_of_event %>
           </div>
         </div>
+
+        <!-- Added the listing-card-content container for text content -->
+        <div class="listing-card-content">
+          <!-- Changed from card-title to listing-card-name -->
+          <h5 class="listing-card-name"><%= listing.name %></h5>
+
+          <!-- Changed to listing-card-location with icon structure -->
+          <div class="listing-card-location">
+            <span class="location-icon">📍</span> <!-- Simple location icon -->
+            <%= listing.location %>
+          </div>
+
+          <!-- Changed to listing-card-price -->
+          <div class="listing-card-price">
+            $<%= listing.price %> per night
+          </div>
+
+          <!-- Added availability information section -->
+          <div class="listing-card-availability">
+            Available:
+            <span class="date-range">
+              <%= listing.availability_start.strftime("%b %d") if listing.availability_start %> -
+              <%= listing.availability_end.strftime("%b %d") if listing.availability_end %>
+            </span>
+          </div>
+        </div>
+
+        <!-- Added listing-card-footer for the action button -->
+        <div class="listing-card-footer">
+          <%= link_to "View Details", listing_path(listing), class: "btn btn-primary" %>
+        </div>
+
       </div>
     <% end %>
   </div>

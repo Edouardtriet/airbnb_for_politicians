@@ -1,138 +1,138 @@
-// app/assets/stylesheets/components/_listings.scss
+// app/assets/stylesheets/components/_listing_card.scss
+
+// Import our configuration files to use shared variables and mixins
 @import "../config/variables";
 @import "../config/mixins";
 
-// Main listing container
-.listing-container {
-  max-width: 900px;
-  margin: 40px auto;
-  text-align: center;
-  padding: 20px;
-}
+// =============================================================================
+// LISTING CARD COMPONENT
+// =============================================================================
+// This component displays individual politician listings/events on the homepage
+// and search results pages. Each card shows key details about what the
+// politician is offering.
+// =============================================================================
 
-// Listing header styles
-.listing-header {
-  margin-bottom: 30px;
+// Main container for the listing card
+.listing-card {
+  background-color: $white; // White background for the card
+  border-radius: $border-radius; // Rounded corners from variables.scss
+  box-shadow: $box-shadow; // Subtle shadow for depth
+  overflow: hidden; // Ensures content doesn't spill outside rounded corners
+  transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth animation for hover
+  height: 100%; // Takes full height of its container
+  display: flex; // Uses flexbox for layout
+  flex-direction: column; // Stacks children vertically
 
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #064E3B;
-    margin-bottom: 15px;
+  // Hover effect - card slightly rises and shadow increases
+  &:hover {
+    transform: translateY(-5px); // Moves card up 5px
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); // Larger shadow when hovering
   }
-}
 
-// Listing details section
-.listing-details {
-  background-color: $white;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  padding: 30px;
-  margin-bottom: 30px;
-  text-align: center;
+  // Image section of the card
+  &-image {
+    position: relative; // Allows absolute positioning of tags/badges
+    height: 200px; // Fixed height for consistent cards
+    overflow: hidden; // Prevents image overflow
 
-  p {
-    margin: 15px 0;
-    font-size: 1.1rem;
-
-    strong {
-      font-weight: 600;
-      color: $text-color;
+    img {
+      width: 100%; // Image fills container width
+      height: 100%; // Image fills container height
+      object-fit: cover; // Maintains aspect ratio while covering container
+      transition: transform 0.5s ease; // Smooth zoom effect
     }
-  }
-}
 
-// Listing price box
-.listing-price {
-  background-color: $white;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  padding: 25px;
-  margin: 0 auto 30px;
-  max-width: 400px;
-  text-align: center;
+    // Zoom effect on hover
+    &:hover img {
+      transform: scale(1.05); // Enlarges image by 5% on hover
+    }
 
-  .book-button {
-    @include button-base;
-    display: block;
-    width: 100%;
-    background-color: $primary-color;
-    color: $white;
-    padding: 12px;
-    font-size: 1.1rem;
-
-    &:hover {
-      background-color: $primary-dark;
+    // Event type badge
+    // Shows what type of event the politician is offering
+    .event-type-badge {
+      position: absolute; // Positioned relative to card image
+      top: 10px; // 10px from top
+      right: 10px; // 10px from right
+      padding: 5px 10px; // Vertical and horizontal padding
+      border-radius: 20px; // Pill shape
+      font-size: 0.75rem; // Small text size
+      font-weight: 600; // Semi-bold text
+      background-color: rgba(0, 0, 0, 0.7); // Semi-transparent black
+      color: white; // White text
     }
   }
-}
 
-.price {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: $primary-color;
-  margin-bottom: 20px;
-}
+  // Content section of the card
+  &-content {
+    padding: 20px; // Spacing inside the content area
+    flex-grow: 1; // Allows content to expand and fill space
+    display: flex; // Uses flexbox
+    flex-direction: column; // Vertical stacking
+  }
 
-// Listing action buttons
-.listing-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  margin-top: 30px;
+  // Listing name (title of the offering)
+  &-name {
+    font-size: 1.25rem; // Larger text
+    font-weight: 600; // Semi-bold
+    margin-bottom: 5px; // Space below name
+    color: $text-color; // Text color from variables
+  }
 
-  .btn {
-    @include button-base;
-    min-width: 150px;
-    text-align: center;
+  // Location of the event/meeting
+  &-location {
+    font-size: 0.875rem; // Smaller text
+    color: $text-color; // Text color
+    margin-bottom: 15px; // Space below location
+    display: flex; // Flexbox for icon + text
+    align-items: center; // Vertically center items
 
-    &-primary {
-      background-color: $primary-color;
-      color: $white;
-
-      &:hover {
-        background-color: $primary-dark;
-      }
+    // Location icon (you can add an icon here)
+    .location-icon {
+      margin-right: 5px; // Space between icon and text
+      color: $primary-color; // Brand color for icon
     }
+  }
 
-    &-secondary {
-      background-color: $white;
-      color: $primary-color;
-      border: 1px solid $primary-color;
+  // Price display
+  &-price {
+    font-size: 1.25rem; // Larger text
+    font-weight: 700; // Bold text
+    color: $primary-color; // Brand color for emphasis
+    margin-bottom: 15px; // Space below price
+  }
 
-      &:hover {
-        background-color: $primary-light;
-      }
+  // Availability dates
+  &-availability {
+    font-size: 0.875rem; // Smaller text
+    color: $secondary-text; // Secondary text color
+    margin-bottom: 20px; // Space below dates
+
+    // Highlight the date range
+    .date-range {
+      font-weight: 500; // Medium weight
     }
+  }
 
-    &-danger {
-      background-color: #e37690;
-      color: $white;
-      border: none;
+&-footer {
+  margin-top: auto; // Pushes footer to bottom of card
+  padding: 0 20px 20px 20px;
 
-      &:hover {
-        background-color: darken(#e55d7c, 10%);
-      }
-    }
-
-    &-link {
-      background: none;
-      color: $primary-color;
-      text-decoration: underline;
-      box-shadow: none;
-
-      &:hover {
-        color: $primary-dark;
-      }
+    // View/Book button
+    .btn {
+      width: 100%; // Full width button
+      // Will use styles from _buttons.scss
     }
   }
 }
 
-// Make buttons on the same line when screen is large enough
-@media (min-width: 768px) {
-  .listing-actions {
-    flex-direction: row;
-    justify-content: center;
+// Grid container for listing cards
+.listing-cards-grid {
+  display: grid; // CSS Grid layout
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); // Responsive columns
+  gap: 30px; // Space between cards
+
+  // Single column on mobile
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr; // One column on small screens
   }
 }
