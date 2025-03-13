@@ -1,1 +1,57 @@
 // Specific CSS for your home-page
+
+.page-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  h1 {
+    margin-bottom: 1rem;
+  }
+}
+
+.feature-list-container {
+  margin: 2rem 0;
+  
+  .feature-list {
+    list-style: none;
+    padding-left: 0;
+    
+    li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      
+      .bullet {
+        position: absolute;
+        left: 0;
+        color: #4CAF50;
+      }
+    }
+  }
+}
+
+.page-actions {
+  text-align: center;
+  margin-top: 3rem;
+  
+  .custom-button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #4CAF50 !important;
+      border-color: #4CAF50 !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  }
+}
